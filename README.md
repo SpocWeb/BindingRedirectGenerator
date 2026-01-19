@@ -9,11 +9,12 @@ from the actual assemblies in the given path.
 ## Command Line Parameters: 
 
 ```
-BindingRedirectGenerator.exe <configFilePath> [<searchDirectoryPath>]
+BindingRedirectGenerator.exe <configFilePath> [KeepExisting|Overwrite] [<searchDirectoryPath>]
 ```
 
 1. Parameter: configFilePath = Path to the app.config/web.config 
-2. Parameter: optional searchDirectoryPath = Path to the bin Directory (fallback to the app.config Directory and subdirectories) 
+2. Parameter: either 'KeepExisting' or 'Overwrite' to control what 
+3. Parameter: optional searchDirectoryPath = Path to the bin Directory (fallback to the app.config Directory and subdirectories) 
 
 The `searchDirectoryPath` is optional and defaults to the Directory of the `configFilePath` and all subdirectories. 
 This works for both `App.config` which is typically in the same  directory as the assemblies
