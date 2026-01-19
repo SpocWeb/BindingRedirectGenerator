@@ -40,7 +40,7 @@ public static class Program
             bool keepExisting = args.Length <= 1 || string.IsNullOrWhiteSpace(args[1]) ? false
                 : OptionOverwrite.Equals(args[1]) ? false
                 : OptionKeepExisting.Equals(args[1]) ? true
-                : throw new ArgumentException("specify either '" + OptionKeepExisting + "' or '" + OptionOverwrite + "'");
+                : throw new ArgumentException("specify either '" + OptionKeepExisting + "' or '" + OptionOverwrite + "' as the 2nd Parameter");
             var inputDirectoryPath = args.Length <= 2 ? null : new DirectoryInfo(args[1]);
 
             Console.WriteLine("Input       : " + inputDirectoryPath);
