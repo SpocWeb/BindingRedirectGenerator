@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Mono.Cecil;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
-using Mono.Cecil;
 // we use cecil because System.Reflection.MetaData crashes...
 
 namespace BindingRedirectGenerator;
@@ -37,8 +37,11 @@ public static class Program
             }
 
             var outputFilePath = new FileInfo(Path.GetFullPath(args[0]));
-            bool keepExisting = args.Length > 1 && !OptionOverwrite.Equals(args[1]);
-            var inputDirectoryPath = args.Length > 2 ? new DirectoryInfo(args[1]) : null;
+            bool keepExisting = args.Length <= 1 || string.IsNullOrWhiteSpace(args[1]) ? false
+                : OptionOverwrite.Equals(args[1]) ? false
+                : OptionKeepExisting.Equals(args[1]) ? true
+                : throw new ArgumentException("specify either '" + OptionKeepExisting + "' or '" + OptionOverwrite + "'");
+            var inputDirectoryPath = args.Length <= 2 ? null : new DirectoryInfo(args[1]);
 
             Console.WriteLine("Input       : " + inputDirectoryPath);
             Console.WriteLine("Output      : " + outputFilePath);
